@@ -18,9 +18,9 @@ public class BibliotecaTest {
 		Libro l2 = new Libro("TITULO", "NOMBRE DEL AUTOR");
 		Libro l3 = new Libro("TITULO2", "NOMBRE DEL SEGUNDO AUTOR");
 		
-		b1.agregarLibro(l1);
-		b1.agregarLibro(l2);
-		b1.agregarLibro(l3);
+		b1.agregarMaterial(l1);
+		b1.agregarMaterial(l2);
+		b1.agregarMaterial(l3);
 		
 		assertEquals(2,b1.getMateriales().size());
 	}
@@ -31,9 +31,9 @@ public class BibliotecaTest {
 		Revista r2 = new Revista("TITULO", "NOMBRE DEL AUTOR");
 		Revista r3 = new Revista("TITULO2", "NOMBRE DEL SEGUNDO AUTOR");
 		
-		b1.agregarRevista(r1);
-		b1.agregarRevista(r2);
-		b1.agregarRevista(r3);
+		b1.agregarMaterial(r1);
+		b1.agregarMaterial(r2);
+		b1.agregarMaterial(r3);
 		
 		assertEquals(2,b1.getMateriales().size());
 	}
@@ -56,8 +56,8 @@ public class BibliotecaTest {
 		Revista r1 = new Revista("Titulo", "Nombre Autor");
 		Libro l1 = new Libro("Titulo Libro", "Nombre Autor Libro");
 		
-		b1.agregarLibro(l1);
-		b1.agregarRevista(r1);
+		b1.agregarMaterial(l1);
+		b1.agregarMaterial(r1);
 		String textoDeseado = "[Titulo: Titulo, Autor: Nombre Autor ] [ Titulo: Titulo Libro, Autor: Nombre Autor Libro ] ";
 		
 		assertEquals(textoDeseado, b1.mostrarMateriales());
@@ -70,7 +70,7 @@ public class BibliotecaTest {
 		b1.agregarUsuario(u1);
 		String textoDeseado = "[Usuario: dni=111, nombre=NOMBRE USUARIO] ";
 		
-		assertEquals(textoDeseado, b1.mostrarUsuario());
+		assertEquals(textoDeseado, b1.mostrarUsuarios());
 	}
 	@Test
 	public void DadoQueseCreoUnaBibliotecaAgregarLibrosYDespuesBuscarPorSuID() {
@@ -80,34 +80,42 @@ public class BibliotecaTest {
 		Libro l2 = new Libro("TITULO2", "NOMBRE DEL SEGUNDO AUTOR"); // 2
 		Libro l3 = new Libro("TITULO3", "NOMBRE DEL TERCER AUTOR"); // 3
 		
-		b1.agregarLibro(l1);
-		b1.agregarLibro(l2);
-		b1.agregarLibro(l3);
+		b1.agregarMaterial(l1);
+		b1.agregarMaterial(l2);
+		b1.agregarMaterial(l3);
 		
-		assertEquals(l1,b1.buscarLibroPorID(2));
-		assertEquals(l2,b1.buscarLibroPorID(3));
-		assertEquals(l3,b1.buscarLibroPorID(4));
+		assertEquals(l1,b1.buscarMaterialPorId(2));
+		assertEquals(l2,b1.buscarMaterialPorId(3));
+		assertEquals(l3,b1.buscarMaterialPorId(4));
 	}
 	@Test
 	public void DadoQueSeCreoUnaBibliotecaPrestarUnMaterialQueSeaPrestableParaElloLaDisponiblidadDeberiaPasarAFalse() {
 		Biblioteca b1 = new Biblioteca();
 		Libro l1 = new Libro("TITULO", "NOMBRE DEL AUTOR"); // 1
 		
-		b1.agregarLibro(l1);
+		b1.agregarMaterial(l1);
 		b1.prestarLibro(1);
 		
 		assertNotEquals(true, b1.prestarLibro(1));
 		
 	}
 	@Test
+	public void DadoQueSeCreoUnaBibliotecaPrestarUnLibroInexistente() {
+		Biblioteca b1 = new Biblioteca();
+		
+		b1.prestarLibro(99);
+		
+		assertFalse(b1.prestarLibro(99));
+	}
+	@Test
 	public void DadoQueSeCreoUnaBibliotecaDevolverUnMaterialQueSeaPrestableParaElloLaDisponiblidadDeberiaPasarTrue() {
 		Biblioteca b1 = new Biblioteca();
 		Libro l1 = new Libro("TITULO", "NOMBRE DEL AUTOR"); // 1
 		
-		b1.agregarLibro(l1);
+		b1.agregarMaterial(l1);
 		b1.devolverLibro(1);
 		
-		assertNotEquals(false, b1.devolverLibro(1));
+		assertNotEquals(true, b1.devolverLibro(1));
 		
 	}
 	

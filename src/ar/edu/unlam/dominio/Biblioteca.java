@@ -1,84 +1,92 @@
-package ar.edu.unlam.dominio;
-
-import java.util.HashSet;
-
-import ar.edu.unlam.interfaces.Prestable;
-
-public class Biblioteca {
-	private HashSet<Usuario>usuarios;
-	private HashSet<Material>materiales;
+	package ar.edu.unlam.dominio;
 	
-	public Biblioteca() {
-		this.usuarios= new HashSet<>();
-		this.materiales= new HashSet<>();
-	}
+	import java.util.HashSet;
 	
-	public void agregarLibro(Libro libronuevo) {
-		this.materiales.add(libronuevo);
-	}
-	public void agregarRevista(Revista revistaNueva) {
-		this.materiales.add(revistaNueva);
-	}
-	public void agregarUsuario(Usuario usuarioNuevo) {
-		this.usuarios.add(usuarioNuevo);
-	}
-	public Libro buscarLibroPorID(Integer id){
-		for (Material material : materiales) {
-			if (material instanceof Libro) {
-				if (id.equals(material.getId())) {
-					return (Libro) material;
-				}
+	import ar.edu.unlam.interfaces.Prestable;
+	
+	public class Biblioteca {
+		private HashSet<Usuario>usuarios;
+		private HashSet<Material>materiales;
+		
+		public Biblioteca() {
+			this.usuarios= new HashSet<>();
+			this.materiales= new HashSet<>();
+		}
+		public Boolean agregarMaterial(Material materialNuevo) {
+			if(materialNuevo != null) {
+				return this.materiales.add(materialNuevo);	
+			} else {
+				return false;
 			}
 		}
-		return null;
-
-	}
-	public Boolean prestarLibro(Integer id){
-		for (Material material : materiales) {
-			if(material instanceof Prestable) {
-				if (material instanceof Libro && id.equals(material.getId())){
-					Prestable libroPrestado = (Prestable) material;
-					return libroPrestado.prestar();
+		public void agregarUsuario(Usuario usuarioNuevo) {
+			this.usuarios.add(usuarioNuevo);
+		}
+		public Libro buscarLibroPorID(Integer id){
+			for (Material material : materiales) {
+				if (material instanceof Libro) {
+					if (id.equals(material.getId())) {
+						return (Libro) material;
 					}
 				}
 			}
-		return false;
-	}
-	public Boolean devolverLibro(Integer id) {
-		for (Material material : materiales) {
-			if(material instanceof Prestable) {
-				if (material instanceof Libro && id.equals(material.getId())){
-					Prestable libroPrestado = (Prestable) material;
-					return libroPrestado.devolver();
-					}
+			return null;
+	
+		}
+		public Material buscarMaterialPorId(Integer id) {
+			for (Material material : materiales) {
+				if(id.equals(material.getId())) {
+					return material;
 				}
 			}
-		return false;
-	}
-	public String mostrarMateriales() {
-		String listaDeMateriales="";
-		for (Material material : materiales) {
-			listaDeMateriales += material.mostrarInfo();
-			}
-		return listaDeMateriales;
+			return null;
 		}
-	public String mostrarUsuario() {
-		String listaDeUsuarios="";
-		for (Usuario usuario : usuarios) {
-			listaDeUsuarios += usuario.toString();
+		public Boolean prestarLibro(Integer id){
+			for (Material material : materiales) {
+				if(material instanceof Prestable) {
+					if (material instanceof Libro && id.equals(material.getId())){
+						Prestable libroPrestado = (Prestable) material;
+						return libroPrestado.prestar();
+						}
+					}
+				}
+			return false;
+		}
+		public Boolean devolverLibro(Integer id) {
+			for (Material material : materiales) {
+				if(material instanceof Prestable) {
+					if (material instanceof Libro && id.equals(material.getId())){
+						Prestable libroPrestado = (Prestable) material;
+						return libroPrestado.devolver();
+						}
+					}
+				}
+			return false;
+		}
+		public String mostrarMateriales() {
+			String listaDeMateriales="";
+			for (Material material : materiales) {
+				listaDeMateriales += material.mostrarInfo();
+				}
+			return listaDeMateriales;
 			}
-		return listaDeUsuarios;
-	}
-	// GETTER AND SETTER
-	public HashSet<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public HashSet<Material> getMateriales() {
-		return materiales;
-	}
+		public String mostrarUsuarios() {
+			String listaDeUsuarios="";
+			for (Usuario usuario : usuarios) {
+				listaDeUsuarios += usuario.toString();
+				}
+			return listaDeUsuarios;
+		}
+		// GETTER AND SETTER
+		public HashSet<Usuario> getUsuarios() {
+			return usuarios;
+		}
 	
+		public HashSet<Material> getMateriales() {
+			return materiales;
+		}
+		
+		
+		
 	
-	
-
-}
+	}
