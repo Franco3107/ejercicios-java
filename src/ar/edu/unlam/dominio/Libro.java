@@ -11,7 +11,7 @@ public class Libro extends Material implements Prestable {
 	}
 	@Override
 	public String mostrarInfo() {	
-		return "[ Titulo: "+ getTitulo() + ", Autor: " + getAutor() + " ] ";
+		return "[ Titulo: "+ getTitulo() + ", Autor: " + getAutor() + ", ID: " + getId()+" ] ";
 	}
 	
 	// GETTER AND SETTER

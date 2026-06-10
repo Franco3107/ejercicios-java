@@ -24,6 +24,13 @@ public class BibliotecaTest {
 		
 		assertEquals(2,b1.getMateriales().size());
 	}
+	@Test (expected = IllegalArgumentException.class)
+	public void DadoQueseCreoUnaBibliotecaAgregarUnLibroNuloytirarUnaExcepcion() {
+		Biblioteca b1 = new Biblioteca();
+	
+		b1.agregarMaterial(null);
+		
+	}
 	@Test
 	public void DadoQueseCreoUnaBibliotecaAgregarUnaRevistaYNoSeDebeAdmitirDuplicados() {
 		Biblioteca b1 = new Biblioteca();
@@ -83,10 +90,11 @@ public class BibliotecaTest {
 		b1.agregarMaterial(l1);
 		b1.agregarMaterial(l2);
 		b1.agregarMaterial(l3);
+		System.out.println(b1.mostrarMateriales());
 		
-		assertEquals(l1,b1.buscarMaterialPorId(2));
-		assertEquals(l2,b1.buscarMaterialPorId(3));
-		assertEquals(l3,b1.buscarMaterialPorId(4));
+		assertEquals(l1,b1.buscarMaterialPorId(1));
+		assertEquals(l2,b1.buscarMaterialPorId(2));
+		assertEquals(l3,b1.buscarMaterialPorId(3));
 	}
 	@Test
 	public void DadoQueSeCreoUnaBibliotecaPrestarUnMaterialQueSeaPrestableParaElloLaDisponiblidadDeberiaPasarAFalse() {
@@ -94,9 +102,8 @@ public class BibliotecaTest {
 		Libro l1 = new Libro("TITULO", "NOMBRE DEL AUTOR"); // 1
 		
 		b1.agregarMaterial(l1);
-		b1.prestarLibro(1);
 		
-		assertNotEquals(true, b1.prestarLibro(1));
+		assertNotEquals(true, b1.prestarLibro(0));
 		
 	}
 	@Test

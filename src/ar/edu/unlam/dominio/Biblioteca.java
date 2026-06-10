@@ -13,14 +13,16 @@
 			this.materiales= new HashSet<>();
 		}
 		public Boolean agregarMaterial(Material materialNuevo) {
-			if(materialNuevo != null) {
-				return this.materiales.add(materialNuevo);	
-			} else {
-				return false;
+			if(materialNuevo==null) {
+				throw new IllegalArgumentException("El material no puede ser null");
 			}
+			return this.materiales.add(materialNuevo);
 		}
-		public void agregarUsuario(Usuario usuarioNuevo) {
-			this.usuarios.add(usuarioNuevo);
+		public Boolean agregarUsuario(Usuario usuarioNuevo) {
+			if(usuarioNuevo==null) {
+				throw new IllegalArgumentException("El usuario no puede ser null");
+			}
+			return this.usuarios.add(usuarioNuevo);
 		}
 		public Libro buscarLibroPorID(Integer id){
 			for (Material material : materiales) {

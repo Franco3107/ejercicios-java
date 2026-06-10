@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public abstract class Material {
 	private Integer id=0;
-	private static Integer ContadorId =0;
+	private static Integer ContadorId =1;
 	private String titulo;
 	private String autor;
 	
